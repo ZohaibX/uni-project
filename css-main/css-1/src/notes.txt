@@ -1,0 +1,133 @@
+                                        Header
+
+Background :-
+// Background Image almost all properties are used.
+// Clip-path property is used
+
+Positioning :-
+// Website logo is positioned. 
+// A text box which contains different types of text and button is positioned.
+
+Animations :-
+// Two types of animations are introduced in this section
+// Different animations are applied in header text and button
+// Button designing with one special property – animation-fill-mode.
+
+Transform properties :-
+// Transform translate and scale properties are introduced.  
+
+After and Before Pseudo class :-
+After pseudo class just creates a dot like element (according to my findings) and when we give it some width, 
+it becomes wider and it becomes like a line (in x-axis) and when we give it a height, then it becomes a thick line.
+
+// backface visibility -- for animation problems ..
+// After pseudo class I applied in the button and animated it beautifully.
+
+
+                                        About
+
+beautiful headings :-
+First of all, I have a heading, beautifully designed.
+
+grid-test use :- 
+Then I have row of two columns using grid-test.
+
+grid-test use (Headings) :- 
+In 1st column, I have heading-paragraph*2 and then a beautiful button.
+
+grid-test use (Image Composition) :- 
+In 2nd col, I have an image composition, images on the top of each other.
+Every photo is transitioned and scaled well. 
+
+special property :-
+A special property is introduced – outline offset.
+
+Text Beautify :-
+Text-shadow is applied.
+
+Transform property :-
+Transform Skew is introduced.
+
+Z-index :-
+z-index is pretty well used. (here and in navigation specially)
+
+
+                                        GridTest
+
+I have a grid test file (JSX and CSS). I can make changes in the file according to the requirements. 
+Actually all I can change is max-width and gutter vertical and horizontal and that’s all we need to change 
+for some specific requirements.
+
+&:not(:last-child) is introduced.
+
+
+                                        Features
+
+Features Cards with icons :-
+Four card type features are designed beautifully.
+Row of 4 columns is used. 
+
+Background Skew :-
+Background is skewed.
+
+&>* is introduced.
+
+Svg icons :-
+In every card, svg icon fonts are introduced and in the class (feature-box) in scss, 
+we have styled that icons as text and their colour is – from linear gradient, 
+(by the way, now we use icomoon fonts or font-awesome for icons)
+
+That is a way to style svg icons, font-awesome icons and text (may be) 
+
+special property introduced for svg icons:- 
+–webkit-bg-clip.
+
+
+                                        Rotating cards
+
+Rotating Cards are well commented in its sass file ...
+
+
+                                        Stories
+
+It is also well commented --
+we have a separate div for video in the start in JSX
+and we will design bg video on the last -- in SCSS 
+
+
+                                        Booking 
+
+Double Background ...
+
+everything is well commented .. 
+
+
+                                        footer 
+
+everything is well commented .. 
+
+
+
+                                        Popup 
+
+//   I implemented opening and closing of popup with context and jsx
+// bcoz tutor was using anchor tag
+
+// New Property :-
+// backdrop-filter: blur(10px) -- to make bg blurry 
+// columns property -- to make paragraph side by side .. 
+
+
+                                        navigation
+
+its documentation should be in its own file ... 
+
+
+
+
+
+
+
+
+
+

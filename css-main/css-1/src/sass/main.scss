@@ -1,0 +1,21 @@
+@import "./abstract/_variables.scss"; // Variables
+//                    Navigation // implemented at last but placed at first
+@import "layouts/navigation.scss";
+//                                Header
+@import "layouts/header";
+//                                GridTest
+@import "layouts/grid-test";
+//                                About
+@import "layouts/about.scss";
+//                                Features
+@import "layouts/features.scss";
+//                                Tours
+@import "layouts/tours.scss";
+//                                Stories
+@import "layouts/stories.scss";
+//                                 Booking
+@import "layouts/booking.scss";
+//                                Footer
+@import "layouts/footer.scss";
+//                              Pop Up
+@import "layouts/popup.scss";

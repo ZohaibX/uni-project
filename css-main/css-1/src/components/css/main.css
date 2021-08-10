@@ -1,0 +1,1123 @@
+.navigation__checkbox {
+  display: none; }
+
+.navigation__button {
+  background-color: #fff;
+  height: 7rem;
+  width: 7rem;
+  border-radius: 50%;
+  position: fixed;
+  top: 6rem;
+  right: 6rem;
+  z-index: 2000;
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1);
+  text-align: center;
+  cursor: pointer; }
+
+.navigation__background {
+  height: 6rem;
+  width: 6rem;
+  border-radius: 50%;
+  position: fixed;
+  top: 6.5rem;
+  right: 6.5rem;
+  background-image: radial-gradient(#7ed56f, #28b485);
+  z-index: 1000;
+  transition: all 0.8s; }
+
+.navigation__nav {
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1500;
+  transition: all 0.8s cubic-bezier(0.83, 0, 0.17, 1);
+  opacity: 0;
+  width: 0; }
+
+.navigation__list {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  list-style: none;
+  text-align: center; }
+
+.navigation__item {
+  margin: 1rem; }
+
+.navigation__link {
+  display: inline-block;
+  font-size: 3rem;
+  font-weight: 300;
+  padding: 1rem 2rem;
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  background-image: linear-gradient(120deg, transparent 0%, transparent 50%, white 50%);
+  background-size: 220%;
+  transition: all 0.4s; }
+  .navigation__link span {
+    margin-right: 1rem;
+    font-size: 3rem;
+    font-weight: 300;
+    color: #fff;
+    display: inline-block; }
+  .navigation__link:hover, .navigation__link:active {
+    background-position: 100%;
+    color: #55c57a;
+    transform: translateX(1rem); }
+    .navigation__link:hover span, .navigation__link:active span {
+      color: #55c57a; }
+
+.navigation__checkbox:checked ~ .navigation__background {
+  transform: scale(80); }
+
+.navigation__checkbox:checked ~ .navigation__nav {
+  opacity: 1;
+  width: 100%; }
+
+.navigation__icon {
+  position: relative;
+  margin-top: 1rem;
+  color: #333;
+  font-size: 3rem !important;
+  transition: all 0.4s; }
+
+.navigation__button:hover .navigation__icon {
+  transform: scale(1.1); }
+
+.navigation__checkbox:checked + .navigation__button .navigation__icon {
+  background-color: transparent !important; }
+
+.navigation__checkbox:checked + .navigation__button .navigation__icon {
+  top: 0;
+  transform: rotate(180deg); }
+
+.fa-times {
+  font-size: 4rem !important;
+  margin-top: 0.5rem; }
+
+/*
+$Breakpoint argument choices
+Phone -- 0 - 600 px 
+tab-port -- 600 - 900 px for tablet portrait 
+tab-land -- 900 - 1200 px for tab landscape 
+[1200 - 1800 ] -- is for desktop we are using and we have made the website with 
+big-desktop -- 1800px + 
+*/
+* {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 400;
+  font-size: 62.5%;
+  /* 10/16 * 100 means this -- so user cannot change to any pixel by himself */
+  /* initially -- it was 10px */
+  /* font-size is very important property here .. this is a base of rem -- means 1 rem = 10px */
+  /* if we change pixels here in font-size .. then every value with rem will change */
+  /* this font-size property is base of rem */
+  line-height: 1.7;
+  /* 1.7* bigger */
+  color: #777;
+  padding: .5rem;
+  /* to have 30px padding on all sides of the whole body -- optional */ }
+  @media only screen and (max-width: 75em) {
+    * {
+      font-size: 56.25%; } }
+  @media only screen and (max-width: 56.25em) {
+    * {
+      font-size: 50%;
+      padding: .4rem; } }
+  @media only screen and (min-width: 112.5em) {
+    * {
+      font-size: 75%; } }
+
+::selection {
+  background-color: #55c57a;
+  color: #fff; }
+
+/*
+$Breakpoint argument choices
+Phone -- 0 - 600 px 
+tab-port -- 600 - 900 px for tablet portrait 
+tab-land -- 900 - 1200 px for tab landscape 
+[1200 - 1800 ] -- is for desktop we are using and we have made the website with 
+big-desktop -- 1800px + 
+*/
+/* background and clip-path */
+.header {
+  height: 85vh;
+  background-image: linear-gradient(to right, rgba(126, 213, 111, 0.8), rgba(40, 180, 133, 0.8)), url("../img/hero-small.jpg");
+  /*to right means from left to right -- we can also say to left , to top , to right bottom ......... then we have to colors with 0.8 opacity and then .. image*/
+  background-size: cover;
+  background-position: top;
+  position: relative;
+  background-repeat: no-repeat; }
+  @supports (clip-path: polygon(0 0)) or (-webkit-clip-path: polygon(0 0)) {
+    .header {
+      -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+      clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+      height: 95vh; } }
+  @media only screen and (max-width: 56.25em) {
+    .header {
+      -webkit-clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+      clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%); } }
+  @media only screen and (min-resolution: 192dpi) and (min-width: 37.5em), only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: 37.5em) {
+    .header {
+      background-image: linear-gradient(to right, rgba(255, 185, 0, 0.8), rgba(255, 119, 48, 0.8)), url("../img/hero.jpg"); } }
+
+/* Positioning */
+.logo-box {
+  position: absolute;
+  top: 1.8rem;
+  left: 1.8rem;
+  /*it means 18px from left and 18 from right*/ }
+
+.logo {
+  height: 50px; }
+
+.text-box {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* when content (100%) is on the other side of 40% left .. it will take 50% of the content .. inside of the 40% left... and same with top 50% */
+  /* it will take 50% of the content on left and top */ }
+
+.heading-primary {
+  color: #fff;
+  text-transform: uppercase;
+  backface-visibility: hidden;
+  text-align: center; }
+
+.heading-primary-main {
+  display: block;
+  color: #fff;
+  font-size: 6rem;
+  font-weight: 500;
+  letter-spacing: 3.5rem;
+  animation-name: moveInLeft;
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
+  /* ease in to be slow when starting and go fast at the end -- vice versa for ease out */
+  /*
+    animation-delay: 1s; // when refreshing the browser .. it'll wait for 1s to start
+    animation-iteration-count: 3; // it will repeat 3 times
+    */
+  /* usual -- after animations -- there is a little shaking even when animation is complete
+       so .. in that class .. add backface-visibility: hidden;
+       as i have done in .heading-primary
+    */ }
+  @media (max-width: 37.5em) {
+    .heading-primary-main {
+      letter-spacing: 1rem;
+      font-size: 5rem; } }
+
+.heading-primary-sub {
+  display: block;
+  /* same as the previous block */
+  color: #fff;
+  font-size: 3rem;
+  font-weight: 500;
+  letter-spacing: 1.75rem;
+  animation: moveInRight 1s ease-out;
+  /* one line animation */ }
+  @media (max-width: 37.5em) {
+    .heading-primary-sub {
+      letter-spacing: 0.5rem; } }
+
+/* animations and keyframes -- (difficult and better way) */
+@keyframes moveInLeft {
+  /* moveInLeft is a variable name -- so can be used anywhere */
+  0% {
+    opacity: 0;
+    transform: translateX(-10rem);
+    /* on the left  */ }
+  80% {
+    transform: translateX(1rem);
+    /* before 100% on main position -- we want it to go 10px further right and then , come back */ }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+    /*  at 0 ... it will be at the main position */ } }
+
+@keyframes moveInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(10rem);
+    /* on the right  */ }
+  80% {
+    transform: translateX(-1rem);
+    /* before 100% on main position -- we want it to go -10px further left and then , come back */ }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+    /*  at 0 ... it will be at the main position */ } }
+
+@keyframes moveInBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(10rem);
+    /* on the right  */ }
+  80% {
+    transform: translateY(-1rem);
+    /* before 100% on main position -- we want it to go -10px further left and then , come back */ }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    /*  at 0 ... it will be at the main position */ } }
+
+/*                                      pseudo classes and easiest way of animations */
+.btn {
+  /* btn:link means -- as if it is a linking tag (a) and .btn:visited means -- btn is clicked once */
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  padding: 1.5rem 4rem !important;
+  /* its y and x */
+  display: inline-block !important;
+  /* it will be in line and it will have its padding and height as a block */
+  border-radius: 10rem !important;
+  transition: all 0.2s ease-out !important;
+  /* easier way of animation -- but not advanced as previous */
+  animation: moveInBottom 0.5s ease-out 0.75s !important;
+  animation-fill-mode: backwards !important;
+  /* this animation property ensures that the button will not be visible before animation is applied */
+  font-size: 1.6rem !important;
+  border: none !important;
+  cursor: pointer; }
+  .btn:focus {
+    outline: none !important; }
+
+.btn:hover {
+  transform: translateY(-0.3rem);
+  /* as in CSS - u axis means from top to bottom .. so -3px means to go back at top -- and 3px means to go on 3px below */
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+  /* hear 0 is x axis -- 10px (y) and 20px means shadow to be blur */ }
+
+.btn:active {
+  transform: translateY(-0.1rem);
+  box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.2);
+  outline: none !important; }
+
+a:focus {
+  outline: 0 !important; }
+
+.btn-white {
+  background-color: #fff !important;
+  color: #777 !important;
+  position: relative; }
+
+.btn-white::after {
+  background-color: #fff; }
+
+.btn-green {
+  background-color: #55c57a !important;
+  color: #fff !important;
+  position: relative; }
+
+.btn-green::after {
+  background-color: #55c57a; }
+
+/* pseudo classes after method */
+/* it is discussed in details in section - 2 video - 7 */
+/* idea is to create something same like previous element */
+.btn::after {
+  content: "";
+  /* it is necessary */
+  display: inline-block;
+  /* as it is -- like .btn */
+  height: 100%;
+  width: 100%;
+  /* its a child of .btn --- so it means 100% h and w of its parent element */
+  border-radius: 10rem;
+  position: absolute;
+  /* ite position relative method will be on - it parent -- so it can move on the sides of its parent element only -- not on the whole header  */
+  top: 0;
+  left: 0;
+  z-index: -1;
+  /* it means -- behind some element -- in this case .. behind its parent */
+  transition: all 0.4s; }
+
+.btn:hover::after {
+  transform: scaleX(1.4) scaleY(1.6);
+  /* to increase size */
+  opacity: 0;
+  /* on hover -- element will get bigger and it will become invisible */
+  /* and there will be some transition applied */ }
+
+.btn-animated {
+  animation: moveInBottom 0.5s ease-out 0.75s !important;
+  animation-fill-mode: backwards !important; }
+
+/*
+$Breakpoint argument choices
+Phone -- 0 - 600 px 
+tab-port -- 600 - 900 px for tablet portrait 
+tab-land -- 900 - 1200 px for tab landscape 
+[1200 - 1800 ] -- is for desktop we are using and we have made the website with 
+big-desktop -- 1800px + 
+*/
+.row {
+  max-width: 114rem;
+  margin: 0 auto !important; }
+  .row:not(:last-child) {
+    margin-bottom: 8rem; }
+    @media only screen and (max-width: 56.25em) {
+      .row:not(:last-child) {
+        margin-bottom: 6rem !important; } }
+  @media only screen and (max-width: 56.25em) {
+    .row {
+      max-width: 50rem;
+      padding: 0 3rem; } }
+  .row::after {
+    content: "";
+    display: table;
+    clear: both; }
+  .row [class^="col-"] {
+    float: left !important; }
+    .row [class^="col-"]:not(:last-child) {
+      margin-right: 6rem !important; }
+      @media only screen and (max-width: 56.25em) {
+        .row [class^="col-"]:not(:last-child) {
+          margin-right: 0;
+          margin-bottom: 6rem; } }
+    @media only screen and (max-width: 56.25em) {
+      .row [class^="col-"] {
+        width: 100% !important; } }
+  .row .col-1-of-2 {
+    width: calc((100% - 6rem) / 2); }
+  .row .col-1-of-3 {
+    width: calc((100% - 2 * 6rem) / 3); }
+  .row .col-1-of-4 {
+    width: calc((100% - 3 * 6rem) / 4); }
+  .row .col-2-of-3 {
+    width: calc(2 * ((100% - 2 * 6rem) / 3) + 6rem); }
+  .row .col-2-of-4 {
+    width: calc(2 * ((100% - 3 * 6rem) / 4) + 6rem); }
+  .row .col-3-of-4 {
+    width: calc(3 * ((100% - 3 * 6rem) / 4) + 2 * 6rem); }
+
+/*
+$Breakpoint argument choices
+Phone -- 0 - 600 px 
+tab-port -- 600 - 900 px for tablet portrait 
+tab-land -- 900 - 1200 px for tab landscape 
+[1200 - 1800 ] -- is for desktop we are using and we have made the website with 
+big-desktop -- 1800px + 
+*/
+.section-about {
+  margin: 0 0.4rem;
+  background-color: #f7f7f7 !important;
+  padding: 25rem 0;
+  margin-top: -24vh !important; }
+  @media only screen and (max-width: 56.25em) {
+    .section-about {
+      padding: 24rem 0; } }
+
+.centered-text {
+  text-align: center; }
+
+.heading-secondary {
+  font-size: 3rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  display: inline-block;
+  background-image: linear-gradient(to right, #7ed56f, #28b485);
+  -webkit-background-clip: text;
+  color: transparent;
+  letter-spacing: 0.2rem;
+  transition: all 0.4s; }
+  @media only screen and (max-width: 56.25em) {
+    .heading-secondary {
+      font-size: 2.5rem; } }
+  @media (max-width: 37.5em) {
+    .heading-secondary {
+      font-size: 2rem;
+      width: 80%; } }
+  .heading-secondary:hover {
+    transform: skewY(2deg) skewX(15deg) scale(1.1);
+    text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2); }
+
+.heading-tertiary {
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-transform: uppercase; }
+
+.paragraph {
+  font-size: 1.6rem; }
+  .paragraph:not(:last-child) {
+    margin-bottom: 3rem; }
+
+.btn-text {
+  color: #55c57a;
+  display: inline-block;
+  text-decoration: none;
+  border-bottom: 1px solid #55c57a;
+  padding: 3px;
+  font-size: 1.6rem;
+  font-weight: 400;
+  transition: all 0.4s; }
+  .btn-text:hover {
+    background-color: #55c57a;
+    color: #fff;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+    transform: translateY(-0.2rem);
+    border-radius: 10rem;
+    padding: 0.2rem 1rem; }
+  .btn-text:active {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    transform: translateY(0); }
+
+.composition {
+  position: relative;
+  margin-top: 8rem; }
+  @media only screen and (max-width: 56.25em) {
+    .composition {
+      margin-top: 1rem; } }
+  .composition__photo {
+    outline-offset: 1rem;
+    width: 60%;
+    box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.4);
+    border-radius: 0.2rem;
+    z-index: 10;
+    transition: all 0.4s;
+    position: absolute; }
+    @media only screen and (max-width: 56.25em) {
+      .composition__photo {
+        float: left;
+        position: relative;
+        width: 33.33333333%;
+        box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.4); } }
+    .composition__photo--p1 {
+      left: 0;
+      top: -2rem; }
+      @media only screen and (max-width: 56.25em) {
+        .composition__photo--p1 {
+          top: -1rem;
+          transform: scale(1.2); } }
+    .composition__photo--p2 {
+      right: 0;
+      top: 2rem; }
+      @media only screen and (max-width: 56.25em) {
+        .composition__photo--p2 {
+          top: 0;
+          left: 0;
+          transform: scale(1.3);
+          z-index: 100; } }
+    .composition__photo--p3 {
+      left: 20%;
+      top: 8rem; }
+      @media only screen and (max-width: 56.25em) {
+        .composition__photo--p3 {
+          top: 1rem;
+          left: 0;
+          transform: scale(1.2); } }
+    .composition__photo:hover {
+      outline: 1rem solid #55c57a;
+      transform: scale(1.05) translateY(-0.5rem);
+      box-shadow: 0 2.5rem 4rem rgba(0, 0, 0, 0.4);
+      z-index: 20; }
+  .composition:hover .composition__photo:not(:hover) {
+    transform: scale(0.95); }
+
+/*
+$Breakpoint argument choices
+Phone -- 0 - 600 px 
+tab-port -- 600 - 900 px for tablet portrait 
+tab-land -- 900 - 1200 px for tab landscape 
+[1200 - 1800 ] -- is for desktop we are using and we have made the website with 
+big-desktop -- 1800px + 
+*/
+.features {
+  padding: 10rem;
+  background-image: linear-gradient(to right bottom, rgba(126, 213, 111, 0.8), rgba(40, 180, 133, 0.8)), url("../img/hero.jpg");
+  background-size: cover;
+  transform: skewY(-7deg);
+  margin-top: -10rem; }
+  .features > * {
+    transform: skewY(7deg); }
+  @media only screen and (max-width: 56.25em) {
+    .features {
+      padding: 8rem; } }
+
+.feature-box {
+  background-color: rgba(255, 255, 255, 0.8);
+  font-size: 1.5rem;
+  padding: 2.5rem;
+  text-align: center;
+  border-radius: 3px;
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.2);
+  transition: all 0.4s; }
+  @media only screen and (max-width: 56.25em) {
+    .feature-box {
+      padding: 1rem 2rem 5rem 2rem; } }
+  .feature-box__text {
+    font-size: 1.2rem; }
+  .feature-box__icon {
+    font-size: 6rem;
+    display: inline-block;
+    background-image: linear-gradient(to right, #7ed56f, #28b485);
+    -webkit-background-clip: text;
+    color: transparent; }
+    @media only screen and (max-width: 56.25em) {
+      .feature-box__icon {
+        margin-bottom: 0; } }
+  .feature-box:hover {
+    transform: translateY(-1.5rem) scale(1.03); }
+
+/*
+$Breakpoint argument choices
+Phone -- 0 - 600 px 
+tab-port -- 600 - 900 px for tablet portrait 
+tab-land -- 900 - 1200 px for tab landscape 
+[1200 - 1800 ] -- is for desktop we are using and we have made the website with 
+big-desktop -- 1800px + 
+*/
+.tours {
+  background-color: #f7f7f7;
+  padding: 25rem 0 5rem 0;
+  margin-top: -14rem;
+  margin-bottom: 0; }
+  @media only screen and (max-width: 56.25em) {
+    .tours {
+      padding: 20rem 0 3rem 0; } }
+
+.card {
+  margin-top: 2rem;
+  perspective: 150rem;
+  -moz-perspective: 150rem;
+  position: relative;
+  height: 45rem; }
+  .card__side {
+    height: 45rem;
+    transition: all 0.8s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 3px;
+    overflow: hidden;
+    box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
+    width: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden; }
+    .card__side--front {
+      background-color: #fff; }
+    .card__side--back {
+      transform: rotateY(180deg); }
+      .card__side--back--1 {
+        background-image: linear-gradient(to right, #ffb900, #ff7730); }
+      .card__side--back--2 {
+        background-image: linear-gradient(to right, #7ed56f, #28b485); }
+      .card__side--back--3 {
+        background-image: linear-gradient(to right, #2928ff, #5643fa); }
+  .card:hover .card__side--front {
+    transform: rotateY(-180deg);
+    background-color: #fff; }
+  .card:hover .card__side--back {
+    transform: rotateY(0); }
+  .card__picture {
+    background-size: cover;
+    height: 17rem;
+    background-blend-mode: screen;
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    border-top-left-radius: 0.3rem;
+    border-top-right-radius: 0.3rem; }
+    .card__picture--1 {
+      background-image: linear-gradient(to right, #ffb900, #ff7730), url("../img/nat-5.jpg"); }
+    .card__picture--2 {
+      background-image: linear-gradient(to right, #7ed56f, #28b485), url("../img/nat-6.jpg"); }
+    .card__picture--3 {
+      background-image: linear-gradient(to right, #2928ff, #5643fa), url("../img/nat-7.jpg"); }
+  .card__heading {
+    text-align: right;
+    position: absolute;
+    top: 9rem;
+    right: 2rem;
+    width: 60%; }
+  .card__heading-span {
+    font-size: 2rem;
+    font-weight: 300;
+    color: #fff;
+    text-transform: uppercase;
+    padding: 1rem 2.2rem;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone; }
+    .card__heading-span--1 {
+      background-image: linear-gradient(to right, rgba(255, 185, 0, 0.85), rgba(255, 119, 48, 0.85)); }
+    .card__heading-span--2 {
+      background-image: linear-gradient(to right, rgba(126, 213, 111, 0.85), rgba(40, 180, 133, 0.85)); }
+    .card__heading-span--3 {
+      background-image: linear-gradient(to right, rgba(41, 40, 255, 0.85), rgba(86, 67, 250, 0.85)); }
+  .card__details ul {
+    list-style: none;
+    width: 100%;
+    margin: 0 auto; }
+    .card__details ul li {
+      text-align: center;
+      font-size: 1.5rem;
+      padding: 1rem; }
+      .card__details ul li:not(:last-child) {
+        border-bottom: 0.1rem solid #eee; }
+  .card__cta {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    text-align: center; }
+  .card__price-box {
+    text-align: center;
+    margin-bottom: 8rem; }
+  .card__price-only {
+    color: #fff;
+    font-size: 1.4rem;
+    text-transform: uppercase; }
+  .card__price-value {
+    color: #fff;
+    font-size: 6rem;
+    font-weight: 100; }
+  @media only screen and (max-width: 56.25em), only screen and (hover: none) {
+    .card {
+      height: auto;
+      background-color: #fff;
+      border-radius: 3px;
+      box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15); }
+      .card__side {
+        height: auto;
+        position: relative;
+        border-radius: 3px;
+        box-shadow: none; }
+        .card__side--back {
+          transform: rotateY(0);
+          clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%); }
+      .card:hover .card__side--front {
+        transform: rotateY(0); }
+      .card__cta {
+        position: relative;
+        top: 0;
+        left: 0;
+        transform: translate(0);
+        width: 100%;
+        text-align: center;
+        padding: 3rem 0; }
+      .card__price-box {
+        margin-bottom: 8rem; }
+      .card__price-only {
+        color: #fff;
+        font-size: 1.4rem;
+        text-transform: uppercase; }
+      .card__price-value {
+        color: #fff;
+        font-size: 6rem;
+        font-weight: 100; } }
+
+/*
+$Breakpoint argument choices
+Phone -- 0 - 600 px 
+tab-port -- 600 - 900 px for tablet portrait 
+tab-land -- 900 - 1200 px for tab landscape 
+[1200 - 1800 ] -- is for desktop we are using and we have made the website with 
+big-desktop -- 1800px + 
+*/
+.stories {
+  margin-top: -2rem;
+  padding: 15rem 0;
+  margin-bottom: 0;
+  margin-left: -1rem;
+  margin-right: -1rem;
+  position: relative; }
+  @media only screen and (max-width: 56.25em) {
+    .stories {
+      padding: 10rem 0; } }
+
+.margin-bottom-4 {
+  margin-bottom: 4rem; }
+
+.margin-top--4 {
+  margin-top: -4rem !important; }
+
+.margin-top-4 {
+  margin-top: 4rem !important; }
+
+.margin-top-3 {
+  margin-top: 3rem !important; }
+
+.margin-top--2 {
+  margin-top: -2rem !important; }
+
+.margin-top-2 {
+  margin-top: 2rem !important; }
+
+.margin-bottom-2 {
+  margin-bottom: 2rem !important; }
+
+.margin-bottom-0 {
+  margin-bottom: 0; }
+
+.margin-top-0 {
+  margin-bottom: 0; }
+
+.story {
+  width: 85%;
+  margin: 0 auto;
+  box-shadow: 0 3rem 6rem rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 3px;
+  padding: 6rem;
+  padding-left: 9rem;
+  font-size: 1.6rem;
+  transform: skewX(-12deg); }
+  .story:not(:last-child) {
+    margin-bottom: 9rem; }
+  @media only screen and (max-width: 56.25em) {
+    .story {
+      width: 100%;
+      padding: 4rem;
+      padding-left: 7rem; } }
+  @media (max-width: 37.5em) {
+    .story {
+      transform: skewX(0deg); } }
+  .story__shape {
+    height: 15rem;
+    width: 15rem;
+    float: left;
+    transform: translateX(-3rem) skew(12deg);
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%; }
+    @media (max-width: 37.5em) {
+      .story__shape {
+        transform: translateX(-3rem) skew(0deg); } }
+    @supports (clip-path: polygon(0 0)) or (-webkit-clip-path: polygon(0 0)) {
+      .story__shape {
+        -webkit-clip-path: circle(50% at 50% 50%);
+        clip-path: circle(50% at 50% 50%);
+        -webkit-shape-outside: circle(50% at 50% 50%);
+        shape-outside: circle(50% at 50% 50%);
+        border-radius: none; } }
+  .story__img {
+    height: 100% !important;
+    transform: translateX(-4rem) scale(1.6);
+    transition: all 0.5s ease-in;
+    backface-visibility: hidden; }
+  .story__text {
+    transform: skewX(12deg); }
+    @media (max-width: 37.5em) {
+      .story__text {
+        transform: skew(0deg); } }
+  .story p {
+    font-size: 1.4rem; }
+  .story__caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 20%);
+    color: #fff;
+    font-size: 1.7rem;
+    text-transform: uppercase;
+    text-align: center;
+    opacity: 0;
+    backface-visibility: hidden;
+    transition: all 0.4s; }
+  .story:hover .story__caption {
+    opacity: 1;
+    transform: translate(-50%, -50%); }
+  .story:hover .story__img {
+    transform: translate(-4rem) scale(1.4);
+    filter: blur(3px) brightness(80%); }
+
+.bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  opacity: .15;
+  overflow: hidden; }
+  .bg-video__content {
+    height: 100%;
+    width: 100%;
+    object-fit: cover; }
+
+/*
+$Breakpoint argument choices
+Phone -- 0 - 600 px 
+tab-port -- 600 - 900 px for tablet portrait 
+tab-land -- 900 - 1200 px for tab landscape 
+[1200 - 1800 ] -- is for desktop we are using and we have made the website with 
+big-desktop -- 1800px + 
+*/
+.booking {
+  margin: 0 -1rem;
+  margin-top: -2rem;
+  padding: 15rem 0;
+  background-image: linear-gradient(to right, #7ed56f, #28b485) !important; }
+  @media only screen and (max-width: 56.25em) {
+    .booking {
+      padding: 10rem 0; } }
+
+.book {
+  background-image: linear-gradient(105deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 55%, transparent 55%), url("../img/nat-10.jpg");
+  background-size: 100%;
+  border-radius: .3rem;
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.2); }
+  @media only screen and (max-width: 75em) {
+    .book {
+      background-image: linear-gradient(105deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 70%, transparent 70%), url("../img/nat-10.jpg");
+      background-size: cover; } }
+  @media only screen and (max-width: 56.25em) {
+    .book {
+      background-image: linear-gradient(to right, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 100%), url("../img/nat-10.jpg");
+      background-size: cover; } }
+  .book__form {
+    width: 57%;
+    padding: 6rem;
+    padding-top: 4rem; }
+    @media only screen and (max-width: 75em) {
+      .book__form {
+        width: 70%; } }
+    @media only screen and (max-width: 56.25em) {
+      .book__form {
+        width: 100%; } }
+
+.form__heading {
+  margin-bottom: 2rem; }
+
+.form__input {
+  font-size: 1.5rem;
+  font-family: inherit;
+  color: inherit;
+  padding: 1.5rem 2rem;
+  border-radius: 2px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: none;
+  border-bottom: 1px solid transparent;
+  width: 95%;
+  display: block;
+  transition: all 0.3s; }
+  @media only screen and (max-width: 56.25em) {
+    .form__input {
+      width: 100%; } }
+  .form__input:focus {
+    outline: none;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+    border-bottom: 3px solid #55c57a; }
+  .form__input::-webkit-input-placeholder {
+    color: #999; }
+  .form__input:focus:invalid {
+    border-bottom: 3px solid #ff7730; }
+
+.form__label {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-left: 1rem;
+  display: block;
+  transition: all 0.3s; }
+
+.form__input:placeholder-shown + .form__label {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4rem); }
+
+.form__radio-group {
+  margin-top: -1rem;
+  margin-bottom: 2rem;
+  width: 47%;
+  display: inline-block; }
+  @media only screen and (max-width: 56.25em) {
+    .form__radio-group {
+      width: 100%;
+      margin-bottom: 2rem; } }
+
+.form__radio-label {
+  font-size: 1.6rem;
+  cursor: pointer;
+  position: relative;
+  padding-left: 3.5rem; }
+
+.form__radio-button {
+  height: 3rem;
+  width: 3rem;
+  border: 5px solid #55c57a;
+  border-radius: 50%;
+  display: inline-block;
+  position: absolute;
+  top: .4rem;
+  left: 0; }
+  .form__radio-button::after {
+    content: "";
+    display: block;
+    height: 1.3rem;
+    width: 1.3rem;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #55c57a;
+    opacity: 0;
+    transition: all 0.2s; }
+
+.form__radio-input:checked ~ .form__radio-label .form__radio-button::after {
+  opacity: 1; }
+
+.form__radio-input {
+  display: none; }
+
+/*
+$Breakpoint argument choices
+Phone -- 0 - 600 px 
+tab-port -- 600 - 900 px for tablet portrait 
+tab-land -- 900 - 1200 px for tab landscape 
+[1200 - 1800 ] -- is for desktop we are using and we have made the website with 
+big-desktop -- 1800px + 
+*/
+.footer {
+  margin: 0 -1rem;
+  background-color: #333;
+  padding: 10rem 0; }
+  @media only screen and (max-width: 56.25em) {
+    .footer {
+      padding: 8rem 0; } }
+  .footer__logo-box {
+    text-align: center;
+    margin-bottom: 8rem; }
+    @media only screen and (max-width: 56.25em) {
+      .footer__logo-box {
+        margin-bottom: 6rem; } }
+  .footer__logo {
+    width: 15rem;
+    height: auto; }
+  .footer__navigation {
+    border-top: 1px solid #777;
+    padding-top: 1rem;
+    display: inline-block; }
+    @media only screen and (max-width: 56.25em) {
+      .footer__navigation {
+        width: 100%;
+        text-align: center; } }
+  .footer__list {
+    list-style: none; }
+  .footer__item {
+    display: inline-block; }
+    .footer__item:not(:last-child) {
+      margin-right: 1.5rem; }
+  .footer__link {
+    color: #f7f7f7;
+    background-color: #333;
+    text-decoration: none;
+    text-transform: uppercase;
+    display: inline-block;
+    font-size: 1rem;
+    padding: 0.3rem 0.3rem;
+    transition: all 0.2s;
+    margin: 0 !important; }
+    .footer__link:hover, .footer__link:active {
+      color: #55c57a;
+      box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.4);
+      transform: rotate(5deg) scale(1.3); }
+  .footer__copyright {
+    font-size: 1.1rem;
+    border-top: 1px solid #777;
+    padding-top: 2rem;
+    width: 70%;
+    float: left; }
+    @media only screen and (max-width: 56.25em) {
+      .footer__copyright {
+        width: 100%;
+        float: none; } }
+
+/*
+$Breakpoint argument choices
+Phone -- 0 - 600 px 
+tab-port -- 600 - 900 px for tablet portrait 
+tab-land -- 900 - 1200 px for tab landscape 
+[1200 - 1800 ] -- is for desktop we are using and we have made the website with 
+big-desktop -- 1800px + 
+*/
+.popup {
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 9999;
+  transition: all .5s; }
+  @supports (-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px)) {
+    .popup {
+      background-color: rgba(0, 0, 0, 0.8);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px); } }
+  .popup__content {
+    width: 75%;
+    background-color: #fff;
+    box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 3px;
+    overflow: hidden;
+    display: table; }
+    @media only screen and (max-width: 56.25em) {
+      .popup__content {
+        width: 85%;
+        height: 80%; } }
+  .popup__left {
+    width: 33.333333%;
+    display: table-cell; }
+    @media only screen and (max-width: 56.25em) {
+      .popup__left {
+        width: 100%;
+        display: block; } }
+  .popup__img {
+    display: block;
+    width: 100%; }
+    @media only screen and (max-width: 56.25em) {
+      .popup__img {
+        display: inline-block;
+        width: 49%;
+        height: 24rem;
+        float: left;
+        margin-right: 1%; } }
+  .popup__right {
+    width: 66.6666667%;
+    display: table-cell;
+    vertical-align: middle;
+    padding: 3rem 5rem; }
+    @media only screen and (max-width: 56.25em) {
+      .popup__right {
+        width: 100%;
+        display: block;
+        text-align: center; } }
+  .popup__text {
+    margin-top: 1rem;
+    font-size: 1.4rem !important;
+    margin-bottom: 4rem;
+    -moz-column-count: 2;
+    -moz-column-gap: 4rem;
+    -moz-column-rule: 1px solid #f7f7f7;
+    column-count: 2;
+    column-gap: 4rem;
+    column-rule: 1px solid #f7f7f7; }
+    @media only screen and (max-width: 56.25em) {
+      .popup__text {
+        width: 100%;
+        text-align: center; } }
+  .popup__close {
+    color: #777;
+    cursor: default;
+    position: absolute;
+    top: 1.5rem;
+    right: 2.5rem;
+    font-size: 3rem;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s;
+    line-height: 1; }
+    .popup__close:hover {
+      color: #55c57a; }

@@ -1,0 +1,276 @@
+// Rotating Cards
+
+@import "../abstract/variables";
+@import "../abstract/mixins";
+
+.tours {
+    background-color: $color-gray-light-1;
+    padding: 25rem 0 5rem 0;
+    margin-top: -14rem;
+    margin-bottom: 0;
+
+    @include respond(tab-port) {
+        padding: 20rem 0 3rem 0;
+    }
+}
+
+//                         !Implementation of Rotating cards Starts
+
+// *Rotation Logic
+// so in normal state , front card is not rotated and we will rotate (180) back card . as there is no back of back card .. so we will see nothing on normal state
+// in hover state , we will rotate front card rotate(-180), so we will not see front . and we will rotate 0 -- back card , so we will see that
+
+.card {
+    // margin-top: -5rem; // just as a helper property
+    margin-top: 2rem; // just as a helper property
+    perspective: 150rem;
+    // we need to give a really large number of pixels ;
+    // it is to have a good rotation
+    // perspective means view
+    -moz-perspective: 150rem; // for mozilla firefox
+    position: relative;
+    height: 45rem;
+    // this is important --
+    // because we want front and back to be same ..
+    // we have given heights to front and back (manually) for confirmation
+    // normally , we don't give heights to something
+
+    // card back and front both have this class - card-side . so both card will have these properties ..
+    &__side {
+        height: 45rem;
+        transition: all 0.8s ease;
+        position: absolute; // relative of the card -- not relative of the whole section .
+        top: 0;
+        left: 0;
+        border-radius: 3px;
+        overflow: hidden; // when we set a picture in front side -- pic's border overlap and removes its border top radius -- so it will control that
+        box-shadow: 0 1.5rem 4rem rgba($color-black, 0.15);
+        width: 100%;
+        -webkit-backface-visibility: hidden; // laazmi for safari
+        backface-visibility: hidden; // when we rotate -- we dont want to see its content .. 
+        // it means both cards (front and back) don't have their own back ..
+
+
+        &--front {
+            background-color: $color-white;
+        }
+
+        // *Back Styling for background only
+
+        &--back {
+            transform: rotateY(180deg); // so back side is already rotated -- so we'll see nothing
+
+            &--1 {
+                background-image: linear-gradient(to right, $color-secondary-light, $color-secondary-dark);
+            }
+
+            &--2 {
+                background-image: linear-gradient(to right, $color-primary-light, $color-primary-dark);
+            }
+
+            &--3 {
+                background-image: linear-gradient(to right, $color-tertiary-light, $color-tertiary-dark);
+            }
+        }
+    }
+
+    &:hover &__side--front {
+        transform: rotateY(-180deg); // remember this - sign .. without this , we will see rotation in some other direction
+        background-color: #fff;
+        //on hover -- front side will be rotated so we'll not see it
+    }
+
+    &:hover &__side--back {
+        transform: rotateY(0);
+        // after making front side invisible , we'll make it visible
+    }
+
+    //                          !Implementation of Rotating cards Ends
+
+    //                           !Front styling of all cards Starts
+    &__picture {
+
+
+        background-size: cover;
+        height: 17rem;
+        background-blend-mode: screen; // it will mix the two backgrounds and it has some great graphic features
+        // because we are not using opacities in the linear gradient.
+        -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        // this clip path property makes overflow : hidden property useless -- so we'll manually set the radius again
+        border-top-left-radius: 0.3rem;
+        border-top-right-radius: 0.3rem;
+
+        &--1 {
+            background-image: linear-gradient(to right, $color-secondary-light, $color-secondary-dark),
+                url("../img/nat-5.jpg");
+            // we are not using opacities here -- bcoz we used blend-mode
+        }
+
+        &--2 {
+            background-image: linear-gradient(to right, $color-primary-light, $color-primary-dark),
+                url("../img/nat-6.jpg");
+            // we are not using opacities here -- bcoz we used blend-mode
+        }
+
+        &--3 {
+            background-image: linear-gradient(to right, $color-tertiary-light, $color-tertiary-dark),
+                url("../img/nat-7.jpg");
+            // we are not using opacities here -- bcoz we used blend-mode
+        }
+    }
+
+    &__heading {
+        text-align: right; // at the right side
+        position: absolute; // its position-relative is at .card
+        top: 9rem;
+        right: 2rem;
+        width: 60%;
+    }
+
+    // Styling all the three headings differently
+    &__heading-span {
+        font-size: 2rem;
+        font-weight: 300;
+        color: $color-white;
+        text-transform: uppercase;
+        padding: 1rem 2.2rem; // is padding se -- mai -- ek line of h4 ko 2 lines mai le aya hoon .. to margin mai problem ae ghi
+        // to fix the margin -- we have  a property
+        -webkit-box-decoration-break: clone; // this webkit is necessary ..
+        box-decoration-break: clone;
+
+        &--1 {
+            background-image: linear-gradient(to right,
+                    rgba($color-secondary-light, 0.85),
+                    rgba($color-secondary-dark, 0.85));
+        }
+
+        &--2 {
+            background-image: linear-gradient(to right,
+                    rgba($color-primary-light, 0.85),
+                    rgba($color-primary-dark, 0.85));
+        }
+
+        &--3 {
+            background-image: linear-gradient(to right,
+                    rgba($color-tertiary-light, 0.85),
+                    rgba($color-tertiary-dark, 0.85));
+        }
+    }
+
+    &__details {
+        // padding: 3rem;
+
+        ul {
+            list-style: none;
+            width: 100%;
+            margin: 0 auto;
+
+            li {
+                text-align: center;
+                font-size: 1.5rem;
+                padding: 1rem;
+
+                &:not(:last-child) {
+                    border-bottom: 0.1rem solid $color-gray-light-2;
+                }
+            }
+        }
+    }
+
+    //                           !Front styling of all cards Ends
+
+    //                           !Back styling of all cards Starts
+
+    &__cta {
+        position: absolute;
+        // way to center -- with positioning
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%;
+        text-align: center;
+    }
+
+    &__price-box {
+        text-align: center;
+        margin-bottom: 8rem;
+    }
+
+    &__price-only {
+        color: $color-white;
+        font-size: 1.4rem;
+        text-transform: uppercase;
+    }
+
+    &__price-value {
+        color: $color-white;
+        font-size: 6rem;
+        font-weight: 100;
+    }
+
+    //                           !Back styling of all cards Ends
+
+    // *Media Query
+    // Idea is that -- we have to movie the back below bcoz users cannot hover in touch mobiles ...
+    //? so its a big media query -- whole rewrite ..
+
+    @media only screen and (max-width: 56.25em),
+    only screen and (hover: none) {
+        // it means a touch device an its opposite is -- hover : hover 
+        // changing card implementation to a single one ..
+
+        height: auto;
+        background-color: $color-white;
+        border-radius: 3px;
+        box-shadow: 0 1.5rem 4rem rgba($color-black, 0.15);
+
+        // its a make of card with 2 sides into one ..
+        &__side {
+            height: auto;
+            position: relative;
+            border-radius: 3px;
+            box-shadow: none;
+
+            &--back {
+                transform: rotateY(0); // we dont wanna rotate it ... we want it to see .. 
+                clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
+            }
+        }
+
+        &:hover &__side--front {
+            transform: rotateY(0); // nothing should change ..
+        }
+
+        // Front Side -- we dont want to change anything from the front side ...
+
+        // Back Side -- Change
+
+        &__cta {
+            position: relative;
+            // way to center -- with positioning
+            top: 0;
+            left: 0;
+            transform: translate(0);
+            width: 100%;
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        &__price-box {
+            margin-bottom: 8rem;
+        }
+
+        &__price-only {
+            color: $color-white;
+            font-size: 1.4rem;
+            text-transform: uppercase;
+        }
+
+        &__price-value {
+            color: $color-white;
+            font-size: 6rem;
+            font-weight: 100;
+        }
+    }
+}

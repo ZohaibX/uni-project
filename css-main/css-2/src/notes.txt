@@ -1,0 +1,56 @@
+// Main Note
+// Only a single item can also be a grid container and then , text inside the element will become grid element 
+// it is used in header.scss
+
+// it is best to display images as block
+
+// implicit rows are created as min-content by default
+
+
+// Notes
+
+Units :-
+// Always try to use responsive units
+// 1fr means a max space it can occupy -- if there is no space to occupy -- then it will be hidden --
+// thats y we use minmax function with it too
+
+grids :-
+// Explicit grids are those -- we have defined already for rows and columns -- so we deal with them normally
+// Implicit grids are those -- that does not fit in a space we have specified for them -- so they occupy their own space in rows or columns-- so we deal with them in a different way
+
+
+grid properties :-
+// min-content -- grid size will be size of  -- according to its content 
+// max-content -- content size will try to fix in a smallest possible grid
+// minmax() -- so grids will be in the limit we give to this function
+//auto-fit is for responsive
+
+// grid-row: 3 / span 2 . means start from line 3 and cover 2 lines forward -- same for cols
+// grid gap does not add spacing on the start or rows/cols and on the ends
+
+
+// Lining :-
+// in 2 cols or in 2 rows -- we have 3 lines - 1 2 3 .. one on the start of 1st block - second on the end of 1st block and on the start of 2nd block and 3rd on the end of 2nd block ..
+// in 3 rows or in  cols -- 4 lines . and vice versa
+// we have line numbers like 1 - end of 1 (2) - start of 2 (2) - end of 2 (3) - start of 3 (3) -- as it is 
+
+
+// Naming :- 
+ -- I have a lecture on that -- i can see that if i don't remember..
+
+// spanning :-
+1 2 3 will indicate line numbers ..
+span 2 means -- to extend to next 2 lines ..
+-1 can only be used with explicit grids 
+
+Usage of cols L
+// most of the times -- we only create columns .. and rows are created automatically 
+// and we can use them
+
+New Property for image for grids :-
+// object-fit property ..
+// images have their own aspect ratio -- so they don't cover all the space in grids or some other places
+// we need to cover the img element with some container like figure ..
+// and then , apply object fit property 
+// this property will only work if we have manually initialized height and width
+

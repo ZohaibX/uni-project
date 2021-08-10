@@ -1,0 +1,50 @@
+@import "../../abstract/variables";
+
+.footer {
+    background-color: $secondary;
+    grid-column: full-start / full-end;
+    padding: 4.5rem;
+}
+
+//  Navigation Items
+.nav {
+    list-style: none;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    grid-gap: 1.1rem;
+    align-items: center;
+
+    &__link {
+        font-size: 0.7rem;
+        color: #fff;
+        text-decoration: none;
+        font-family: verdana;
+        text-transform: uppercase;
+        text-align: center;
+
+        display: block; // so every element will occupy all the space of its grid as padding
+        padding: 0.8rem;
+
+        transition: all .2s;
+
+        &:hover,
+        &:active {
+            background-color: rgba(#fff, 0.05);
+            transform: translateY(-3px);
+        }
+    }
+}
+
+.copyright {
+    font-size: 0.7rem;
+    color: $gray-light-2;
+    margin-top: 3.2rem;
+    text-align: center;
+
+    width: 70%;
+
+    // to center element in 70% width
+    margin-left: auto;
+    margin-right: auto;
+}

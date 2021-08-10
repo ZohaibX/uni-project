@@ -1,0 +1,76 @@
+@import "./abstract/_variables.scss";
+@import "./abstract/_base.scss";
+@import "./abstract/_mixins.scss";
+@import "./abstract/animations.scss";
+@import "./abstract/typography.scss";
+
+//                                GridTest
+
+@import "layouts/grid-test";
+
+//                              App.JS Container 
+
+// Logic of main container 
+// rows are not as important as columns
+// 4 sections - 4 rows -- vice versa .. but we can add even 1 by one or we could remove some rows later on if required
+// if we know how many sections we have -- then create rows according to their size , heights and widths ..
+// create the columns in a way as we did below -- because its a good way -- its like bootstrap cols where data can occupy multiple columns ..
+// in this case -- we needed to have a sidebar of some rem -- so we created that first
+// but in future if we have no sidebar -- we could create columns like 1fr on the sides and 8 to 10 cols between them -- with minmax of course
+// and we could change them accordingly if we have some sidebar of some rems -- 
+// but the logic is same ..
+
+.container {
+    display: grid;
+    grid-template-rows: 80vh min-content 40vw repeat(3, min-content);
+    // 1st row of 80 % of view height
+    // 3rd one is 40% of view width 
+    // all others are min-content -- described 0n the start
+
+    // Always name the columns
+    grid-template-columns: [sidebar-start] 5rem [sidebar-end full-start] minmax(4rem, 1fr) [center-start] repeat(8, [col-start] minmax(min-content, 8rem) [col-end]) [center-end] minmax(4rem, 1fr) [full-end];
+    // 1140px -- we decided for total width 
+    // 1140px/8columns = 140px --> 14rem -- so 14 rem is bigger for me in jsx (may be) so i decided 8rem
+    // 1fr on the sides of main 8 columns -- to center the 8 columns --
+    // minmax on 1fr so we always have some space bcoz we could have a content in that space or we may have need some mwrgin
+    // but this way is better than margin technique -- we could use or ignore the space on left and right side -- which we can't do with margin 0 auto or justify content technique ..
+    // these 2 fr's will occupy equal space before 8 columns and after 
+    // All other is namings -- very good to have ...
+    // Note for namings -- we have 2 col names (start and end) for 8 columns .. so everyone has numbering with a single space -- used it here of course 
+
+    //! Testing
+    // &>* {
+    //     padding: 40px;
+    //     font-size: 2rem;
+    // }
+
+    // For Sidebar to move up ..
+    // we will remove sidebar's column and will add a new row instead
+    @include respond(1000) {
+        grid-template-rows: 4rem 80vh min-content 40vw repeat(3, min-content);
+        grid-template-columns: [full-start] minmax(4rem, 1fr) [center-start] repeat(8, [col-start] minmax(min-content, 8rem) [col-end]) [center-end] minmax(4rem, 1fr) [full-end];
+
+        // and now we will change grid positioning in sidebar.scss
+    }
+
+    // For realtors to go below the header .. we  will create a row for that and will position the realtors
+    @include respond(1000) {
+        grid-template-rows: 4rem calc(100vh - 4rem) min-content min-content min-content repeat(3, min-content);
+        // first min-content is add for realtors
+        // and when realtor is moved below header -- we want header to be 100vh
+        // 3rd min-content was 40vw before -- for story__content .. in this view port size -- we dont want it as 40vw which will create problems .. so we changed it to min-content
+    }
+}
+
+
+//                                Content
+
+@import "./layouts/eachComponent/sidebar.scss";
+@import "./layouts/eachComponent/features.scss";
+@import "./layouts/eachComponent/footer.scss";
+@import "./layouts/eachComponent/gallery.scss";
+@import "./layouts/eachComponent/header.scss";
+@import "./layouts/eachComponent/home.scss";
+@import "./layouts/eachComponent/realtors.scss";
+@import "./layouts/eachComponent/sidebar.scss";
+@import "./layouts/eachComponent/story.scss";

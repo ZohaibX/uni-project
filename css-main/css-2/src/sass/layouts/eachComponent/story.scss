@@ -1,0 +1,132 @@
+@import "../../abstract/variables";
+@import "../../abstract/mixins";
+
+
+// In Smaller view port 
+// story content should be on top 
+// story images should be -- below 
+// so an extra row of min-content will be created -- we can create that manually in .container or it will be created as implicit grids 
+
+
+.story {
+
+    display: grid;
+    grid-template-columns: repeat(2, minmax(min-content, 8rem));
+
+    //                                          Story Pictures
+    &__pictures {
+        background-color: $primary;
+
+        grid-column: full-start / col-end 4;
+
+        background-image: linear-gradient(rgba($primary, .5), rgba($primary, .5)), url("../img/back.jpg"); // url acc to main.css file
+        background-size: cover;
+
+        display: grid;
+        // so we want a 6/6 container 
+        grid-template-rows: repeat(6, 1fr);
+        grid-template-columns: repeat(6, 1fr);
+
+        // if we have 10rems space in our grids for the image ..
+        // and image is of 8 rems .. it will not stretch to 10 rems 
+        // so we could do that align item to center -- on y axis 
+        // and this will center the 8 rem picture in 10 rems .. 
+        // and same behavior with x-axis (may be)
+        align-items: center;
+
+        @include respond(800) {
+            grid-column: 1 / -1;
+            grid-row: 6 / 7;
+
+            padding: 2rem;
+        }
+    }
+
+    &__img {
+
+        &--1 {
+            width: 100%; // so it will occupy 100% width of its grid cell ..
+
+            // we want this image from 2nd row to 5th row and same tih columns
+            grid-row: 2 / 6;
+            grid-column: 2 / 6;
+            // from line 2 to line 6
+
+            box-shadow: 0 2rem 5rem rgba(0, 0, 0, .1);
+
+            @include respond(800) {
+                grid-column: 1 / 5;
+                grid-row: 1 / -1;
+            }
+        }
+
+        // Note
+        // We could use absolute positioning or transform translate to position the 2nd image 
+        // and here it is -- another way
+
+        &--2 {
+            width: 115%;
+            // it is 115 bcoz we want it to be bigger --
+            // so it will be bigger only from right side -- bcoz from left side -- we have assigned it to start from 2nd line of the column
+            // so thats y it will not expand from right side ..
+
+            z-index: 20; // the img will get bigger after increasing its size but the expanded part will be hidden ..
+            // so z-index comes to rescue 
+
+            grid-row: 4 / 6;
+            grid-column: 4 / 7;
+
+            box-shadow: 0 2rem 5rem rgba(0, 0, 0, .2);
+
+            @include respond(800) {
+                grid-row: 1 / -1;
+                width: 100%;
+            }
+        }
+    }
+
+    //                                          Story Columns
+    &__content {
+        background-color: $gray-light-1;
+        grid-column: col-start 5 / full-end;
+
+        padding: 4rem 7vw;
+
+        // in the content - we have four elements on the top of each other 
+        // which is one dimensional 
+        // so we could use flex box here
+
+        /*
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: center;
+        */
+
+        // and we could also do this part with grids
+        display: grid;
+        align-content: center;
+        justify-items: start;
+
+        @include respond(800) {
+            grid-column: 1 / -1;
+            grid-row: 5 / 6;
+        }
+
+    }
+
+    &__text {
+        font-size: .8rem;
+        font-style: italic;
+
+        margin-bottom: 2.5rem;
+        margin-top: -1rem;
+        // just to check if this property works without mentioning display flex to some element
+    }
+
+    &__btn {
+        @include respond(tab-port) {
+            margin-top: -1rem;
+        }
+    }
+}

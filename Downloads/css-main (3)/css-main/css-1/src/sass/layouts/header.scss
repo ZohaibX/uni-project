@@ -1,0 +1,228 @@
+// Here -- In this case, we shaped a same button (with same shape and same border radius) with after pseudo class and positioned it in the same place like actual button but behind actual button. And we styled it, which appears on hover of actual button.
+
+@import "../abstract/variables";
+@import "../abstract/base";
+@import "../abstract/mixins";
+
+/* background and clip-path */
+
+.header {
+    height: 85vh; // /*vh means view height -- total is 100 */
+    background-image: linear-gradient(to right, rgba($color-primary-light, 0.8), rgba($color-primary-dark, 0.8)),
+        url("../img/hero-small.jpg");
+    // its a normal screen size
+    // image ka url --main.css file k hisaab se dena hai
+    /*to right means from left to right -- we can also say to left , to top , to right bottom ......... then we have to colors with 0.8 opacity and then .. image*/
+
+    background-size: cover; // /*it will cover the background in every size of page .. like responsive*/
+    background-position: top; // /*when changing size of screen -- picture position can change .. so we fixed it for top .. means --top position will remain same ... we could say -- bottom , center*/
+    position: relative; // /*to have position absolute or something other in its children and it can move on this header only*/
+    background-repeat: no-repeat;
+
+    @supports (clip-path: polygon(0 0)) or (-webkit-clip-path: polygon(0 0)) {
+        -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+        clip-path: polygon(
+            0 0,
+            100% 0,
+            100% 75vh,
+            0 100%
+        ); //  /*it is xy xy -- we can design different type of polygons from the site Clippy ... https://bennettfeely.com/clippy/ */
+        height: 95vh;
+    }
+
+    @include respond(tab-port) {
+        -webkit-clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+        clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+    }
+
+    // when resolution is higher than 192 dots per inch -- simply .. higher than normal
+    // and screen width is larger than 600px - 37.5em
+    // because we don't wanna show a high resolution image in small screens
+
+    // , is for or condition
+    // when screen width is > 2000px - 125em.. then we must have picture of high resolution ..
+    // 192 dpi means 2x
+    @media only screen and (min-resolution: 192dpi) and (min-width: 37.5em),
+        only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: 37.5em) {
+        // this is for safari -- which means 2x resolution only screen and (min-width: 125em)
+
+        background-image: linear-gradient(to right, rgba($color-secondary-light, 0.8), rgba($color-secondary-dark, 0.8)),
+            url("../img/hero.jpg");
+    }
+}
+
+/* Positioning */
+
+.logo-box {
+    position: absolute; // /*to have position absolute ... its parent element should have position relative*/
+    top: 1.8rem;
+    left: 1.8rem;
+    /*it means 18px from left and 18 from right*/
+}
+
+.logo {
+    height: 50px; // /*it will set width automatically*/
+}
+
+.text-box {
+    position: absolute;
+    top: 40%;
+    left: 50%; // /* content will be (start) from 40% top and 50% from left .. but we don't want that .. we want some part of content inside the 40 and 50 percent too*/
+    transform: translate(-50%, -50%);
+    /* when content (100%) is on the other side of 40% left .. it will take 50% of the content .. inside of the 40% left... and same with top 50% */
+    /* it will take 50% of the content on left and top */
+}
+
+.heading-primary {
+    color: $color-white;
+    text-transform: uppercase;
+    backface-visibility: hidden; // /* in parent element -- to not have little shaking when animation is completed */
+    text-align: center;
+}
+
+.heading-primary-main {
+    display: block;
+    color: $color-white; // /* block property will make its content -- inline and will add a break in its start and the end */
+    font-size: 6rem;
+    font-weight: 500;
+    letter-spacing: 3.5rem;
+    animation-name: moveInLeft;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+    /* ease in to be slow when starting and go fast at the end -- vice versa for ease out */
+
+    /*
+    animation-delay: 1s; // when refreshing the browser .. it'll wait for 1s to start
+    animation-iteration-count: 3; // it will repeat 3 times
+    */
+
+    /* usual -- after animations -- there is a little shaking even when animation is complete
+       so .. in that class .. add backface-visibility: hidden;
+       as i have done in .heading-primary
+    */
+
+    @include respond(phone) {
+        letter-spacing: 1rem;
+        font-size: 5rem;
+    }
+}
+
+.heading-primary-sub {
+    display: block;
+    /* same as the previous block */
+    color: $color-white;
+    font-size: 3rem;
+    font-weight: 500;
+    letter-spacing: 1.75rem;
+    animation: moveInRight 1s ease-out;
+    /* one line animation */
+
+    @include respond(phone) {
+        letter-spacing: 0.5rem;
+    }
+}
+
+/* animations and keyframes -- (difficult and better way) */
+
+@import "../abstract/animations";
+
+/*                                      pseudo classes and easiest way of animations */
+
+.btn {
+    /* btn:link means -- as if it is a linking tag (a) and .btn:visited means -- btn is clicked once */
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+    padding: 1.5rem 4rem !important;
+    /* its y and x */
+    display: inline-block !important;
+    /* it will be in line and it will have its padding and height as a block */
+    border-radius: 10rem !important;
+    transition: all 0.2s ease-out !important;
+    /* easier way of animation -- but not advanced as previous */
+    animation: moveInBottom 0.5s ease-out 0.75s !important;
+    animation-fill-mode: backwards !important;
+    /* this animation property ensures that the button will not be visible before animation is applied */
+    font-size: 1.6rem !important;
+
+    // styles for button tag
+    border: none !important;
+    cursor: pointer;
+
+    &:focus {
+        // sometimes -- blue border appears when we click the button tag
+        outline: none !important;
+    }
+}
+
+.btn:hover {
+    transform: translateY(-0.3rem);
+    /* as in CSS - u axis means from top to bottom .. so -3px means to go back at top -- and 3px means to go on 3px below */
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+    /* hear 0 is x axis -- 10px (y) and 20px means shadow to be blur */
+}
+
+.btn:active {
+    transform: translateY(-0.1rem);
+    box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.2);
+    outline: none !important;
+}
+
+a:focus {
+    outline: 0 !important;
+}
+
+.btn-white {
+    background-color: $color-white !important;
+    color: $color-gray-dark !important;
+    position: relative;
+}
+
+.btn-white::after {
+    background-color: $color-white;
+}
+
+.btn-green {
+    background-color: $color-primary !important;
+    color: $color-white !important;
+    position: relative;
+}
+
+.btn-green::after {
+    background-color: $color-primary;
+}
+
+/* pseudo classes after method */
+/* it is discussed in details in section - 2 video - 7 */
+/* idea is to create something same like previous element */
+
+.btn::after {
+    content: "";
+    /* it is necessary */
+    display: inline-block;
+    /* as it is -- like .btn */
+    height: 100%;
+    width: 100%;
+    /* its a child of .btn --- so it means 100% h and w of its parent element */
+    border-radius: 10rem;
+    position: absolute;
+    /* ite position relative method will be on - it parent -- so it can move on the sides of its parent element only -- not on the whole header  */
+    top: 0;
+    left: 0;
+    z-index: -1;
+    /* it means -- behind some element -- in this case .. behind its parent */
+    transition: all 0.4s;
+}
+
+.btn:hover::after {
+    transform: scaleX(1.4) scaleY(1.6);
+    /* to increase size */
+    opacity: 0;
+    /* on hover -- element will get bigger and it will become invisible */
+    /* and there will be some transition applied */
+}
+
+// This was for confirmation ..
+.btn-animated {
+    animation: moveInBottom 0.5s ease-out 0.75s !important;
+    animation-fill-mode: backwards !important;
+}

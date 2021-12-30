@@ -1,0 +1,106 @@
+// Main Note 
+// Responsive techniques which are applied here are in .. 
+//img tag and in grid template column and grid template rows
+
+// New Property -- filter ..
+
+@import "../../abstract/variables";
+@import "../../abstract/mixins";
+
+.header {
+    background-color: $gray-dark-1;
+
+    grid-column: full-start / col-end 6;
+
+    background-image: linear-gradient(rgba($secondary, 0.93), rgba($secondary, 0.93)), url("../img/hero.jpeg");
+    background-size: cover;
+    background-position: center;
+
+    display: grid;
+    grid-template-rows: 1fr min-content minmax(6rem, min-content) 1fr;
+    // just don't give a fixed value
+    // 1fr will occupy as much space as it can
+    // 1fr for logo , min content for h3 , 6rem for h1 , 1fr for button
+    // button k baad 2 chhezain bachti hain -- as seen on and logos ...
+    // un dono ko apni rows mil jaen ghi -- bcoz column to ek e rakha hai hum ne ..
+    // or un rows mai grid row gap apply ho gha .. to spacing b ho jae ghi
+
+    /*
+    grid-template-columns: max-content;
+    // only one column according to the width of widest of its children -- which is -- heading 1 in this case
+    // so column will have a width of h1 element
+    */
+
+    // Responsive way of declaring columns -- bcoz it will always remain max-content otherwise
+    grid-template-columns: minmax(min-content, max-content);
+
+    grid-row-gap: 0.8rem;
+
+    padding: 4rem; // padding for the whole container
+    padding-top: 2rem;
+
+    justify-content: center; // all of its content to center
+
+    @include respond(800) {
+        grid-column: 1 / -1;
+    }
+
+    @include respond(phone) {
+        padding: 3rem;
+    }
+
+    &__logo {
+        height: 2rem;
+        justify-self: center; // centered of its width -- given in grid template rows
+    }
+
+    &__seenOn-text {
+        display: grid; // so now this element is a grid container -- now its text will become grid item ..
+        grid-template-columns: 1fr max-content 1fr; // 1fr for before pseudo element -- max-content is for text and 1fr for after pseudo element
+        grid-column-gap: 0.8rem;
+        align-items: center;
+
+        font-size: 1rem;
+        color: $gray-light-2;
+
+        // creating side lines
+        &::before,
+        &::after {
+            content: "";
+            height: 1px;
+            display: block;
+            background-color: currentColor;
+
+            // Idea is --
+            // this will create a point of 1px .. and that point will expand to the 1fr column width -- which we have provided
+            // so that .. it will look like a line ..
+        }
+    }
+
+    &__btn {
+        align-self: start;
+        justify-self: start;
+    }
+
+    &__seenOn-logos {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 2rem;
+        justify-items: center;
+        align-items: center;
+
+        img {
+            /*
+            height: 1.5rem; // if we give all imgs -- same width .. then their heights will be different and this will look weird
+            // in this case -- all will have different width but same height but it looks good and fine
+            */
+
+            // Now making it responsive
+            max-height: 1.5rem;
+            max-width: 100%;
+
+            filter: brightness(70%);
+            // >100% means darker and <100% means lighter
+        }
+    }
+}

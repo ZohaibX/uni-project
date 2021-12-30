@@ -1,0 +1,196 @@
+@import "../abstract/variables";
+
+// Implementation
+// we have a radio button and its label is designed as icon -- so whenever we click the label -- radio/checkbox will be checked 
+// First we designed a small background &__bg
+// when radio button is checked -- we will see the bg
+// then we created the icon block and covered bg with that
+// then we applied scale(80) on bg when icon is click 
+// it will look like as background is rising behind icon 
+// then we have a nav container -- it started from top 0 and left 0 and have full width when icon is clicked
+// so nav's list will have full width and we positioned it on center 
+// then li links // text centered and other styles of effects
+// then we implement icon // which i designed by font-awesome .. reasoning is at that portion
+
+// Implementation Pattern after writing all the selectors --  $$
+
+.navigation {
+
+    // actual checkbox
+    &__checkbox {
+        // its nav checkbox -- // !$$ 3
+        display: none;
+        // transition: all 0.4s;
+    }
+
+    //  This is icon 
+    // !$$ 2
+    &__button {
+        // its nav label -- btn-icon ---- 
+        // it will be the main icon -- on the top of &__background
+        background-color: $color-white;
+        // color: black;
+        height: 7rem;
+        width: 7rem;
+        // it should be wider than &__bg
+        border-radius: 50%; // height and width is same to make it circle
+        position: fixed;
+        top: 6rem;
+        right: 6rem;
+        // as it is wider than &__background .. so its 6rem will cover their 6.5rem
+        z-index: 2000; // even on the top of &__background
+        box-shadow: 0 1rem 3rem rgba($color-black, .1);
+
+        text-align: center;
+        cursor: pointer;
+
+    }
+
+    // this is background which will rise from behind of the icon 
+    // !$$ 1
+    &__background {
+        // icon's background -- jo k peechhe se nikle ghi icon ke  
+        // this will be -- behind &__button
+        height: 6rem;
+        width: 6rem;
+        border-radius: 50%; // height and width is same to make it circle
+        position: fixed;
+        top: 6.5rem;
+        right: 6.5rem;
+        background-image: radial-gradient($color-primary-light, $color-primary-dark);
+        // radial makes bg rising from the center ..
+        z-index: 1000;
+
+        //transform: scale(80);
+        // peechhe se nikle ghi icon ke
+        // we wanna do that after clicking the button
+
+        transition: all 0.8s;
+
+    }
+
+    // its a container of nav ul list
+    &__nav {
+        // !$$ 4
+        height: 100vh;
+        // width: 100%; we'll make width 100% when we want nav to show after clicking icon
+        position: fixed;
+        top: 0;
+        right: 0;
+        // nav is on right:0  but its width is 100% -- so &__list is on the top:50 and left:50
+        // navigation is appearing from right side in transition // bcoz we said right : 0 here 
+        // we could also say left : 0
+        z-index: 1500;
+
+        transition: all 0.8s cubic-bezier(0.83, 0, 0.17, 1);
+        // its cheat sheet is available in notes
+
+        opacity: 0;
+        width: 0;
+        // we are making nav invisible until checkbox is not checked
+        // with opacity 0 , it will be invisible but still will be there ... 
+        // with width 0 .. its fine
+    }
+
+    // Nav List
+    &__list {
+        // !$$ 5
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        list-style: none;
+        text-align: center;
+    }
+
+    // Single LI
+    &__item {
+        // !$$ 7
+        margin: 1rem;
+    }
+
+    // single Element
+    &__link {
+        // !$$ 6
+        display: inline-block; // if its not inline block 
+        font-size: 3rem;
+        font-weight: 300;
+        padding: 1rem 2rem;
+        color: $color-white;
+        text-decoration: none;
+        text-transform: uppercase;
+        background-image: linear-gradient(120deg, transparent 0%, transparent 50%, white 50%);
+        // we test the transparent color with orangered // and then change that to transparent at last
+        // ive used this property b4 in this course .. so not gonna explain again
+        background-size: 220%; // For background-size: 100%; when we inc or dec the bg size .. then 120 deg solid line btw bg will move -- bcoz bg will get bigger
+        // bg-size brhana pr sakta hai .. jab 120deg rotation ki waja se koi problem ho
+        transition: all 0.4s;
+
+        span {
+            // its numbering of list
+            margin-right: 1rem;
+            font-size: 3rem;
+            font-weight: 300;
+            color: $color-white;
+            display: inline-block;
+        }
+
+        &:hover,
+        &:active {
+            background-position: 100%;
+            // previously // we increased the size and here -- we changed the position of background -- to -- white color
+            color: $color-primary;
+            transform: translateX(1rem);
+            // .. then translateX will not work bcoz it is already having tha whole width
+
+            span {
+                color: $color-primary;
+            }
+        }
+    }
+
+    // !$$ 8 
+    &__checkbox:checked~&__background {
+        transform: scale(80);
+    }
+
+    &__checkbox:checked~&__nav {
+        opacity: 1;
+        width: 100%;
+    }
+
+    // ! $$ 9
+    // icon functionality was not working in jsx bcoz of &nbsp;
+    // so thats y i used font-awesome and react js tricks 
+    // to change bars into cross 
+
+    &__icon {
+        position: relative;
+        margin-top: 1rem;
+
+        color: $color-gray-dark-3;
+        font-size: 3rem !important;
+        transition: all 0.4s;
+    }
+
+    &__button:hover &__icon {
+        transform: scale(1.1);
+    }
+
+
+
+    &__checkbox:checked+&__button &__icon {
+        background-color: transparent !important;
+    }
+
+    &__checkbox:checked+&__button &__icon {
+        top: 0;
+        transform: rotate(180deg);
+    }
+
+}
+
+.fa-times {
+    font-size: 4rem !important;
+    margin-top: 0.5rem;
+}

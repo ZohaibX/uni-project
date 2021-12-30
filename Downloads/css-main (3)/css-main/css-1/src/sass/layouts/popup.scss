@@ -1,0 +1,133 @@
+@import "../abstract/variables";
+@import "../abstract/mixins";
+
+.popup {
+    // its entire popup section
+    height: 100vh;
+    width: 100%; //its not necessary but lets keep it 
+    position: fixed; // position fixed does not need position relative -- and it also works as position relative
+    top: 0;
+    left: 0;
+    background-color: rgba($color-black, 0.8);
+    z-index: 9999; // on top of everything
+    transition: all .5s;
+
+    @supports (-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px)) {
+        // if these properties are supported in browser -- then its inner code will work
+        background-color: rgba($color-black, 0.8);
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px) // this is a new property to filter elements behind selected elements 
+            // brightness too
+            // like background .. 
+            // but this only works on safari for now
+    }
+
+    &__content {
+        // Overall main Content
+        width: 75%;
+        // height: 50rem; // we don't give a height -- its content will decide it -- but its for testing purpose
+        background-color: $color-white;
+        box-shadow: 0 2rem 4rem rgba($color-black, .2);
+
+        @include absoluteCenter;
+
+        border-radius: 3px;
+        overflow: hidden;
+        // bcoz of its images -- its border will overlap 
+        // and it will be in parent element
+        display: table; // to handle its two parts
+
+        @include respond(tab-port) {
+            width: 85%;
+            height: 80%;
+        }
+    }
+
+    // Left Side
+
+    &__left {
+        width: 33.333333%;
+        display: table-cell; // so it is treated as table's cell
+
+        @include respond(tab-port) {
+            width: 100%;
+            display: block;
+        }
+    }
+
+    &__img {
+        display: block;
+        width: 100%; // entire 33% width .. so its height will be assigned automatically
+
+        @include respond(tab-port) {
+            display: inline-block;
+            width: 49%; // entire 33% width .. so its height will be assigned automatically
+            height: 24rem;
+            float: left;
+            margin-right: 1%; // 1% that was left in 50% width
+        }
+    }
+
+    // Note -- we could use float left on left and right side -- so they will come side by side
+    // but their will be a small problem in both height
+    // so to clear this problem -- we can use table property
+    // display: table in parent element and then we can use table's properties in it child elements
+
+    // Right Side
+
+    &__right {
+        width: 66.6666667%;
+        display: table-cell; // so it is treated as table's cell
+        vertical-align: middle; // so this is how  we can move this cell in the whole height
+        padding: 3rem 5rem;
+
+        @include respond(tab-port) {
+            width: 100%;
+            display: block;
+            text-align: center;
+        }
+    }
+
+    &__text {
+        margin-top: 1rem;
+        font-size: 1.4rem !important;
+        margin-bottom: 4rem;
+
+        -moz-column-count: 2;
+        -moz-column-gap: 4rem;
+        -moz-column-rule: 1px solid $color-gray-light-1; // border btw cols
+
+        // New CSS Property -- for text to display as columns
+        column-count: 2;
+        column-gap: 4rem;
+        column-rule: 1px solid $color-gray-light-1; // border btw cols
+
+        // -moz-hyphens: auto;
+        // -ms-hyphens: auto;
+        // -webkit-hyphens: auto;
+        // hyphens: auto; // this property may only work in HTML .. it adds hyphens when line is ending and word is not
+
+        @include respond(tab-port) {
+            width: 100%;
+            text-align: center;
+        }
+    }
+
+    &__close {
+        color: $color-gray-dark;
+        cursor: default;
+        position: absolute; // its parent is &__content
+        top: 1.5rem;
+        right: 2.5rem;
+        font-size: 3rem;
+        text-decoration: none;
+        display: inline-block;
+        transition: all 0.2s;
+        line-height: 1;
+
+        &:hover {
+            color: $color-primary;
+        }
+    }
+
+}

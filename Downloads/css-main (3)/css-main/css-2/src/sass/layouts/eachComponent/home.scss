@@ -1,0 +1,106 @@
+@import "../../abstract/variables";
+
+.homes {
+    grid-column: center-start / center-end;
+    margin: 8rem 0;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+    grid-gap: 4rem;
+}
+
+//                                  Single Home Card
+
+.home {
+    background-color: $gray-light-1;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); // 2 cols of same sizes 
+    grid-row-gap: 2.3rem;
+
+    &__img {
+        width: 100%; // 100% of 1fr
+
+        grid-row: 1 / 2; // specifying this just because of the icon -- so it will not occupy img's row
+        grid-column: 1 / -1;
+        z-index: 1;
+    }
+
+    // Like Button
+    &__like {
+        // now positioning it -- on the top of image -- using grids
+        grid-row: 1 / 2;
+        grid-column: 2 / 3;
+
+        color: $primary;
+        width: 1.5rem;
+        height: 1.5rem;
+
+        // Doing this will occupy 1st row and will transfer picture to 2nd row --
+        // so we need to specify row in img explicitly
+
+        z-index: 2;
+
+        // positioning in its own cell 
+        justify-self: end;
+        margin: .5rem;
+    }
+
+    // Name Placement
+    &__name {
+        font-family: verdana;
+        font-size: 1rem;
+        text-align: center;
+        padding: .7rem;
+        background-color: $secondary;
+        color: #fff;
+        font-weight: 400;
+
+        // now we want this name to move up and to be on the center of both cells
+
+        // for row
+        grid-row: 1 / 2; // so we moved it to the first row
+        width: 80%;
+        justify-self: center;
+
+        // For columns
+        grid-column: 1 / -1;
+        align-self: end; // because it was set to stretch -- by default
+        transform: translateY(50%); // it will move 50% of its own height 
+
+        // z-index: 
+        z-index: 3;
+    }
+
+    &__location,
+    &__rooms {
+        margin-top: 1.3rem; // bcoz we wanna have some space -- even when we have grig gap
+    }
+
+    // Svg icons and text
+    &__location,
+    &__rooms,
+    &__area,
+    &__price {
+
+        font-size: .8rem;
+        margin-left: 1.2rem;
+
+        display: flex; // tp make svg and text side by side
+        align-items: center;
+
+        svg {
+            color: $primary;
+            width: 1.3rem;
+            height: 1.3rem;
+
+            margin-right: .5rem;
+        }
+
+        p {}
+    }
+
+    &__btn {
+        grid-column: 1 / -1;
+    }
+}

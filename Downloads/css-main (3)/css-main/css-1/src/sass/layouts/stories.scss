@@ -1,0 +1,219 @@
+// video background will be added after end // as here
+
+@import "../abstract/variables";
+@import "../abstract/mixins";
+
+//                                     Stories without Video Background
+
+.stories {
+    // background-color: 
+    // its for testing purpose .. we have to remove bg when adding a video behind it
+    //$color-gray-light-1; 
+    margin-top: -2rem;
+    padding: 15rem 0; // y and x
+    margin-bottom: 0;
+    margin-left: -1rem;
+    margin-right: -1rem;
+    // these margins to manage the background ... bcox it was having some problem
+    position: relative; // for bg video ..
+
+    @include respond(tab-port) {
+        padding: 10rem 0; // y and x
+    }
+
+}
+
+.margin-bottom-4 {
+    margin-bottom: 4rem;
+}
+
+.margin-top--4 {
+    margin-top: -4rem !important;
+}
+
+.margin-top-4 {
+    margin-top: 4rem !important;
+}
+
+.margin-top-3 {
+    margin-top: 3rem !important;
+}
+
+.margin-top--2 {
+    margin-top: -2rem !important;
+}
+
+.margin-top-2 {
+    margin-top: 2rem !important;
+}
+
+
+.margin-bottom-2 {
+    margin-bottom: 2rem !important;
+}
+
+.margin-bottom-0 {
+    margin-bottom: 0;
+}
+
+.margin-top-0 {
+    margin-bottom: 0;
+}
+
+
+
+//                                      Single Story
+
+.story {
+
+    width: 85%; // only 85% we wanna give
+    margin: 0 auto; // center the story
+
+    &:not(:last-child) {
+        margin-bottom: 9rem;
+    }
+
+    box-shadow: 0 3rem 6rem rgba($color-black, .1);
+    background-color: rgba($color-white, .6);
+    border-radius: 3px;
+    padding: 6rem;
+    padding-left: 9rem; // it will be 6 from upper and 3 from here
+    font-size: $default-font-size;
+    transform: skewX(-12deg);
+    // we skewed the whole section .. 
+    // so now we have to skewY(12deg) to all the direct children of this class 
+    // we can do as & > * {} or we can do it inside their own classes -- doing it inside their own classes
+
+    @include respond(tab-port) {
+        width: 100%;
+        padding: 4rem;
+        padding-left: 7rem;
+    }
+
+    @include respond(phone) {
+        transform: skewX(0deg);
+    }
+
+    //                              Setting image shape - block of image
+
+    &__shape {
+        // Note 
+        // i was having a problem with story__shape but i found that -- 
+        // problem we -- in a circle container - img was appearing as square
+        // i had to scale the picture (1.4) to get the exact circle
+        height: 15rem;
+        width: 15rem;
+        // to have square shape
+
+        float: left; // to float on left
+
+        transform: translateX(-3rem) skew(12deg);
+        // as we have floated something .. so we cannot do something with margins ..
+        // so to take picture -3rem of x axis -- we use translate ..
+
+        position: relative;
+        overflow: hidden;
+        // for the case clip-path: property does not work ;
+        // when picture is bigger than the space we have given to it ..
+        // it will make picture according to the size of that
+
+        border-radius: 50%;
+        // for the case clip-path: property does not work ;
+
+        @include respond(phone) {
+            transform: translateX(-3rem) skew(0deg);
+        }
+
+        @supports (clip-path: polygon(0 0)) or (-webkit-clip-path: polygon(0 0)) {
+            -webkit-clip-path: circle(50% at 50% 50%);
+            clip-path: circle(50% at 50% 50%);
+            // it will shape the picture and will make it a circle .. 
+
+            -webkit-shape-outside: circle(50% at 50% 50%);
+            shape-outside: circle(50% at 50% 50%);
+            // some radius at horizontal and vertical
+            // all it defines that how the content (outside) will be floated around this element
+            // text box is a sibling of this element ... 
+            // in this case -- all the text we be float around a circle
+            // !we must need to use height width and float property in order to use it
+
+            border-radius: none; // as we are using clip path here
+        }
+
+
+    }
+
+    // Setting the image itself
+
+    &__img {
+        height: 100% !important;
+        transform: translateX(-4rem) scale(1.6);
+        // to center the picture itself and with scale -- translateX
+        //image will zoom -- scale(1.6)
+        transition: all 0.5s ease-in;
+        backface-visibility: hidden; // it covers everything weird handling animations
+    }
+
+    &__text {
+        transform: skewX(12deg);
+
+        @include respond(phone) {
+            transform: skew(0deg);
+        }
+    }
+
+    & p {
+        font-size: 1.4rem;
+    }
+
+    &__caption {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, 20%); // we changed y direction for some transitional effects
+        color: $color-white;
+        font-size: 1.7rem;
+        text-transform: uppercase;
+        text-align: center;
+        opacity: 0;
+        backface-visibility: hidden; // bcoz caption was shaking after transition
+        transition: all 0.4s;
+    }
+
+    &:hover &__caption {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+
+    &:hover &__img {
+        transform: translate(-4rem) scale(1.4); // less zoomed;
+        filter: blur(3px) brightness(80%); // special filter property
+        // brightness -- more that 100% for brighter and less than for darker
+    }
+
+}
+
+
+//                      Setting  Background video -- 
+// so we'll put everything in that
+
+// to make it happen // add an element before all the stories and h2 -- video
+// its special element is introduced before all the elements in HTML 5
+
+.bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    opacity: .15;
+    overflow: hidden;
+
+    &__content {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        // its like bg-size cover
+    }
+}

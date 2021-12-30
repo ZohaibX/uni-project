@@ -1,0 +1,60 @@
+@import "../../abstract/variables";
+
+.features {
+    grid-column: center-start / center-end;
+
+    margin: 8rem 0;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+    // we want 3 columns of same sizes ..
+    // so features class have 6 elements in jsx .. so 6 elements will fix in two rows
+    // so two (implicit) rows will be created automatically -- so we can design them later
+    // that is why we are not initializing rows already .. bcoz they can automatically be created (implicit rows).
+    // and the implicit rows can be designed automatically when content gets bigger
+    grid-gap: 4rem;
+}
+
+//                                  Single Feature
+
+.feature {
+
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    // 1st column for just icon and 2nd column is 1fr which will occupy all possible space ..
+    // in this case -- .feature has 3 elements -- and 2 columns -- so two implicit rows will be created automatically .. it will be 2/2 grid - 4 grids actually 
+    // so features 1st element in 1st row 1st col 
+    // 2nd will be in 2nd col 1st row
+    // 3rd will be in 2nd row 1st col //
+    // 4rth will be in 2nd row 2nd col 
+    // that means -- in first column -- we will have icon and &__text .. but we want it -- below the h4 (in 2nd column)
+    // so to place text from 1st col to 2nd .. we could use order (which will be used when we have specified rows may be ..)
+    // and other better idea is to make icon spanning for 1st row to 2nd row -- so text will automatically be placed in 2nd col
+
+    grid-row-gap: 1rem;
+    grid-column-gap: 1.5rem;
+    align-items: start; // it is said to be stretch by default
+    // to remove extra spacing from the top of &--text 
+
+    // icons
+    &__icon {
+        color: $primary;
+        width: 2.3rem;
+        height: 2.3rem;
+        grid-row: 1 / span 2; // -1 can only be used with explicit grids --- from 1st line to last line of two rows
+        transform: translateY(-.2rem)
+    }
+
+    // The Text
+    &__text {
+        font-size: .9rem;
+
+        &--light {
+            color: $gray-light-1
+        }
+
+        &--dark {
+            color: $gray-dark-1
+        }
+    }
+}

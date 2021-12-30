@@ -1,0 +1,46 @@
+                                flex properties
+
+// flex: 0 0 18%; its grow shrink and width
+// flex : 1 , means to expand on all the possible free space
+// flex: 1; -- margin-right: auto; // mr-auto will work same as flex : 1 but with its own margin -- flex 1 has full padding inside its border which is not that good -- i can check with some bg color -- ive used that in this project of course
+// flex-direction : column will change main axis from x axis to y axis --so justify content will work for y axis and vice versa with align items
+
+
+// justify-content: center;is to align every item in the main origin - x axis of the actual width of container
+// align-items is to align every item in the cross origin - y axis of the actual height of container
+// align content is for whole content
+// align self is for individual property element ..
+//align-self: stretch; // for the case to cover full height
+// flex-wrap: wrap; // so its content will move to next line if it cannot be side by side -- content will go to the new lines
+// every flex item has an order of 0 -- 1 will be the right most and -1 will be the left most .
+
+
+// currentColor will use if element's color is specified .. otherwise  element's parent color
+
+
+//transform-origin: center; // transform will start from center ..
+
+// z-index only works when position is specified
+
+//svg icons have some padding from inline elements -- so we can control them this way -- display : flex
+
+
+//&:not(:last-of-type) -- parent can have multiple child -- so to select last child of same type -- eg paragraph which is in 2nd of 5th position will be selected if we apply this -- we have used it here
+
+// we have focus element on button tag ... 
+
+// media queries -- larger to smaller 
+
+                                                Masks
+
+// Older browsers 
+// bgimage = url with linear gradient
+// bgsize = cover 
+
+// newer browsers
+// bgcolor -- any color we want -- ..
+// -webkit-mask-image : url ..
+// -webkit-mask-size : cover 
+// so this techniques will colour the image with bg color used
+
+

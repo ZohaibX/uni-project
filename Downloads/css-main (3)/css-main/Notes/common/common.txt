@@ -1,0 +1,1 @@
+abstract folder in sass directory will be almost common for all files 

@@ -1,0 +1,66 @@
+@import "../abstract/variables";
+@import "../abstract/mixins";
+
+.features {
+    padding: 10rem;
+    background-image: linear-gradient(to right bottom, rgba($color-primary-light, 0.8), rgba($color-primary-dark, 0.8)), url("../img/hero.jpg");
+    background-size: cover;
+    transform: skewY(-7deg); // is section ko terha krne k liye -- we could also use clip path property
+
+    // now the content of this section also skewed -- no we'll transform : skewY(7deg) to make them seedha 
+    // we can do that in .feature-box section -- and second way is here
+    &>* {
+        // * means all child and > means direct child only -> & * means all child of & and & > * -- only direct children of &
+        // because bg was screwed first .. so we have to re-skew its all elements -- cards
+        transform: skewY(7deg);
+    }
+
+    margin-top: -10rem; //  section ko terha krne se -- oopr ki thori jaga nikal i thi
+
+    @include respond(tab-port) {
+        padding: 8rem;
+    }
+}
+
+.feature-box {
+    // height: 30rem; we never initialize heights by ourselves 
+    background-color: rgba($color-white, 0.8);
+    font-size: 1.5rem;
+    padding: 2.5rem;
+    text-align: center;
+    border-radius: 3px;
+    box-shadow: 0 1.5rem 4rem rgba($color-black, 0.2);
+    transition: all 0.4s;
+
+    @include respond(tab-port) {
+        padding: 1rem 2rem 5rem 2rem;
+        // height: 28rem;
+    }
+
+    &__text {
+        font-size: 1.2rem;
+
+    }
+
+    &__icon {
+
+        // this is all -- to design icons with linear gradient colour ..  
+        // way to style svg icons , font-awesome icons and text (may be)  
+
+        font-size: 6rem;
+        // margin-bottom: .5rem;
+        display: inline-block; // to have its specified height and padding
+        background-image: linear-gradient(to right, $color-primary-light, $color-primary-dark);
+        -webkit-background-clip: text;
+        color: transparent;
+
+        @include respond(tab-port) {
+            margin-bottom: 0;
+        }
+    }
+
+    &:hover {
+        transform: translateY(-1.5rem) scale(1.03);
+    }
+
+}

@@ -1,0 +1,27 @@
+/                                             Full Screen Header
+
+What normal full screen header has ?
+-- logo .. Heading .. sub-heading .. some button ... for now 
+
+What html element can we have ?
+-- according to me --
+-- .header > { .logo-box > .logo-img } + .main-heading + .sub-heading + .button 
+
+
+What we actually have 
+-- .header > {.logo-box > .logo-img} + { .text-box > h1.all-headings > spans {main + sub + button} }
+
+Properties we need to apply on the header class -- which is the head of all classes 
+* ------- setting height -- no need to specify width normally
+* ------- setting background image -- image should be of normal screen size
+* ------- must use of @supports(clip-path) , media query and 192 dpi resolution 
+
+Properties we need  to specify to the logo image, which is child of .header 
+* ------- handle position of .logo-box 
+* ------- and handle measurements of .logo-img (actual image)
+
+Properties we need to specify for .text-box and h1.all-headings(contains all span tags)
+handle position of .text-box -- transform it, scale it 
+* ------- apply common properties to all headings using h1.all-headings
+* ------- apply measurements on each of main and sub heading, apply animation
+* ------- apply styling on button's span tag, apply media queries and different pseudoclasses, apply animation
